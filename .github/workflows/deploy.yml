@@ -12,6 +12,10 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     name: Deploy to Klynt
+    permissions:
+      contents: read
+      id-token: write
+      attestations: write
 
     steps:
       - name: Checkout code
@@ -27,11 +31,11 @@ jobs:
         run: npm ci --prefer-offline
 
       - name: Deploy to Klynt
-        uses: KlyntLabs/action@v0.0.4
+        uses: KlyntLabs/action@v0.0.5
         with:
           api-key: ${{ secrets.KLYNT_API_KEY }}
           tenant-id: ${{ secrets.KLYNT_TENANT_ID }}
           api-url: ${{ secrets.KLYNT_API_URL || 'https://api.klynt.io' }}
           # manifest defaults to ./package.json
           # entry defaults to ./src/index.tsx
-          skip-attestation: 'true'
+          # SLSA attestation enabled for security

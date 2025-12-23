@@ -38,7 +38,7 @@ jobs:
             --format=esm \
             --platform=browser \
             --target=es2020 \
-            --external:@klynt/miniapp-sdk \
+            --external:@klyntlabs/miniapp-sdk \
             --external:react \
             --external:react-dom \
             --outfile=bundle.js

@@ -25,13 +25,20 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          registry-url: 'https://registry.npmjs.org'
 
-      - name: Install dependencies
-        run: yarn install
+      - name: Clean npm cache
+        run: npm cache clean --force
+
+      - name: Install dependencies with retries
+        run: |
+          for i in {1..3}; do
+            npm install --legacy-peer-deps && break || sleep 15;
+          done
 
       - name: Build bundle
         run: |
-          yarn esbuild src/index.tsx \
+          ./node_modules/.bin/esbuild src/index.tsx \
             --bundle \
             --minify \
             --format=esm \
@@ -49,4 +56,3 @@ jobs:
           tenant-id: ${{ secrets.KLYNT_TENANT_ID }}
           api-url: ${{ secrets.KLYNT_API_URL || 'https://api.klynt.io' }}
           bundle: ./bundle.js
-          # SLSA attestation enabled for security

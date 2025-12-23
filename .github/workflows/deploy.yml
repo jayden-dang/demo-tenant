@@ -38,7 +38,7 @@ jobs:
 
       - name: Build bundle
         run: |
-          ./node_modules/.bin/esbuild src/index.tsx \
+          npx esbuild src/index.tsx \
             --bundle \
             --minify \
             --format=esm \

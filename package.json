@@ -1,0 +1,52 @@
+{
+  "name": "@klynt/demo-tenant-miniapp",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Demo tenant mini-app showcasing context-specific capabilities",
+  "author": "Klynt Labs",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KlyntLabs/miniapps"
+  },
+  "homepage": "https://github.com/KlyntLabs/miniapps/tree/main/demo-tenant",
+  "type": "module",
+  "klynt": {
+    "id": "com.klynt.demo-tenant",
+    "name": "Hello Tenant Demo",
+    "description": "Context-aware miniapp for Projects, Learn, and Studio",
+    "permissions": [
+      "editor:read",
+      "editor:onChange",
+      "learn:content:read",
+      "studio:lesson:read"
+    ]
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "format": "prettier --write \"src/**/*.{ts,tsx}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx}\"",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@klynt/miniapp-sdk": "0.0.3",
+    "@types/react": "^19.1.4",
+    "@types/react-dom": "^19.1.4",
+    "@typescript-eslint/eslint-plugin": "^8.19.1",
+    "@typescript-eslint/parser": "^8.19.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "eslint": "^9.17.0",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-react-refresh": "^0.4.16",
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.5"
+  }
+}

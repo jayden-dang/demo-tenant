@@ -34,7 +34,7 @@ jobs:
         run: npm run build
 
       - name: Deploy to Klynt
-        uses: KlyntLabs/action@v0.0.13
+        uses: KlyntLabs/action@v0.0.14
         with:
           api-key: ${{ secrets.KLYNT_API_KEY }}
           api-url: ${{ secrets.KLYNT_API_URL || 'https://api.klynt.io' }}

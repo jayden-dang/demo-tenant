@@ -30,23 +30,8 @@ jobs:
       - name: Install dependencies
         run: npm ci --prefer-offline
 
-      - name: Verify esbuild installation
-        run: |
-          ls -la node_modules/.bin/ || echo "No .bin directory"
-          npm ls esbuild || echo "esbuild not found"
-
-      - name: Build bundle
-        run: |
-          ./node_modules/.bin/esbuild src/index.tsx \
-            --bundle \
-            --minify \
-            --format=esm \
-            --platform=browser \
-            --target=es2020 \
-            --external:@klyntlabs/miniapp-sdk \
-            --external:react \
-            --external:react-dom \
-            --outfile=bundle.js
+      - name: Build with Vite
+        run: npm run build
 
       - name: Deploy to Klynt
         uses: KlyntLabs/action@v0.0.6
@@ -54,4 +39,4 @@ jobs:
           api-key: ${{ secrets.KLYNT_API_KEY }}
           tenant-id: ${{ secrets.KLYNT_TENANT_ID }}
           api-url: ${{ secrets.KLYNT_API_URL || 'https://api.klynt.io' }}
-          bundle: ./bundle.js
+          bundle: ./dist/bundle.js

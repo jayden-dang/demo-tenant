@@ -12,8 +12,8 @@ export default defineConfig({
       fileName: 'bundle',
     },
     rollupOptions: {
-      // Externalize React - provided by sandbox runtime
-      external: ['react', 'react-dom'],
+      // Externalize React and SDK - provided by sandbox runtime
+      external: ['react', 'react-dom', '@klyntlabs/miniapp-sdk'],
       output: {
         globals: {
           react: 'React',

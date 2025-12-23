@@ -30,14 +30,24 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Build bundle
+        run: |
+          npx esbuild src/index.tsx \
+            --bundle \
+            --minify \
+            --format=esm \
+            --platform=browser \
+            --target=es2020 \
+            --external:@klynt/miniapp-sdk \
+            --external:react \
+            --external:react-dom \
+            --outfile=bundle.js
+
       - name: Deploy to Klynt
         uses: KlyntLabs/action@v0.0.6
-        env:
-          NODE_PATH: ${{ github.workspace }}/node_modules
         with:
           api-key: ${{ secrets.KLYNT_API_KEY }}
           tenant-id: ${{ secrets.KLYNT_TENANT_ID }}
           api-url: ${{ secrets.KLYNT_API_URL || 'https://api.klynt.io' }}
-          # manifest defaults to ./package.json
-          # entry defaults to ./src/index.tsx
+          bundle: ./bundle.js
           # SLSA attestation enabled for security
